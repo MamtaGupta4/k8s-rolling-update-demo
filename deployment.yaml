@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: rolling-update-demo
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: rolling-demo
+
+  template:
+    metadata:
+      labels:
+        app: rolling-demo
+
+    spec:
+      containers:
+      - name: webapp
+        image: rolling-update-demo:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
